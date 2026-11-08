@@ -386,6 +386,7 @@ pub fn command() -> Command {
         .after_help(AFTER_HELP)
         .disable_help_flag(true)
         .disable_version_flag(true)
+        .version(env!("CARGO_PKG_VERSION"))
         .infer_long_args(true)
         .allow_negative_numbers(true)
         .arg(
@@ -394,6 +395,13 @@ pub fn command() -> Command {
                 .long("help")
                 .action(ArgAction::Help)
                 .help("show this help message and exit"),
+        )
+        .arg(
+            Arg::new("version")
+                .short('V')
+                .long("version")
+                .action(ArgAction::Version)
+                .help("show the version and exit"),
         )
 }
 

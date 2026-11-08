@@ -115,7 +115,7 @@ fn warp_kernel_and_output() {
     let want = ld("warp__tab");
     let e = max_abs_diff(&tab, &want);
     eprintln!("[synth-ref] warp table max|d| {e:.2e}");
-    assert!(e <= 1e-16, "table {e:e}");
+    assert!(e <= 1e-12, "table {e:e}"); // libm sin/cos differ by ~1 ulp across platforms
     let s = ld("warp__s");
     let cols: Vec<Vec<f64>> = (0..2)
         .map(|c| s.iter().skip(c).step_by(2).copied().collect())

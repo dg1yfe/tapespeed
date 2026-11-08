@@ -114,6 +114,7 @@ Optional-value options (`--lowpass`, `--auto-notch`) take the next token if it i
 | `--tape-speed` | speed | – | nominal recording speed: `19.05cm`, `19.05 cm/s`, `7.5ips`, `7½ips`, `1 7/8 ips`, `15/16ips`, `0.1905m/s`; bare number = cm/s. Used by model physics |
 | `--play-speed` | speed | – | transfer playback speed if different; needs `--tape-speed`. Play factor F = play/tape: search centre = ref·F, F part of L1 |
 | `-h`, `--help` | flag | – | help text, exit 0 |
+| `-V`, `--version` | flag | – | print `tapespeed <version>`, exit 0 |
 <!-- drift:main:end -->
 
 ### 5.2 Interactions
@@ -561,7 +562,7 @@ Expected limit with spill + 1 candidate: ~2.65 GiB per hour of audio → 16 GB m
 ## 13. Exit codes and messages
 | exit | cause |
 |---|---|
-| 0 | success; `--help` |
+| 0 | success; `--help`; `--version` |
 | 1 | runtime error (stderr `Class: message` or a plain message), any batch file failed, every `synth` error, `--max-ram` parse error |
 | 2 | usage error from clap (unknown/ambiguous option, invalid value, missing `<input>`), `--ref and -o are required (except with --survey)`, an output that is an input file (§5.5), batch naming errors (§5.3) |
 

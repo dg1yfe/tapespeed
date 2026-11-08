@@ -169,7 +169,7 @@ fn option_set_defaults_help_match_reference() {
         }
     }
     // no extra options beyond the stored definition except the memory/batch ones and --overwrite
-    const EXTRA: [&str; 4] = ["max_ram", "threads", "tmp_dir", "overwrite"];
+    const EXTRA: [&str; 5] = ["max_ram", "threads", "tmp_dir", "overwrite", "version"];
     assert!(
         EXTRA
             .iter()
