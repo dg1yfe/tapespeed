@@ -6,9 +6,9 @@ members = ["crates/*"]
 version = "26.11.1-rc.1"
 edition = "2024"
 license = "GPL-3.0-or-later"
-# TODO: set once the hosting is decided
-# repository = ""
-# homepage = ""
+authors = ["Felix Erckenbrecht <code@eligs.de>"]
+repository = "https://github.com/dg1yfe/tapespeed"
+homepage = "https://github.com/dg1yfe/tapespeed"
 
 [profile.release]
 debug = 1          # symbols for profiling

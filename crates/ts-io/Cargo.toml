@@ -3,6 +3,8 @@ name = "ts-io"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+authors.workspace = true
+repository.workspace = true
 description = "tapespeed I/O: ffmpeg pipes, FLAC encoder, spill files, machine probe, number formatting"
 publish = false
 

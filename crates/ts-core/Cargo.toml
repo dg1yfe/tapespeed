@@ -3,6 +3,8 @@ name = "ts-core"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+authors.workspace = true
+repository.workspace = true
 description = "tapespeed algorithms: reference tracking, speed model, evidence, absolute speed, correction, survey"
 publish = false
 
