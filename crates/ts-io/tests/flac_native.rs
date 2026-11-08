@@ -135,16 +135,27 @@ fn same_as_ffmpeg_x(name: &str, x: &[f32], ch: usize, sr: u32, chunk: usize) {
     match save(&b, x, ch, sr, Some("flac")) {
         Ok(()) => {
             let db = decode_s32(&b);
-            if da != db {
-                let i = da
-                    .chunks(4)
-                    .zip(db.chunks(4))
-                    .position(|(p, q)| p != q)
-                    .unwrap();
+            // NaN -> integer is platform-dependent in ffmpeg (C conversion); compare finite samples
+            // only. Our own encoder defines NaN as 0 (checked below).
+            if let Some(i) = da
+                .chunks(4)
+                .zip(db.chunks(4))
+                .enumerate()
+                .position(|(i, (p, q))| p != q && !x[i].is_nan())
+            {
                 panic!("{name}: sample {i} differs (x = {:e})", x[i]);
             }
         }
         Err(e) => assert!(frames < 16, "{name}: ffmpeg failed: {e}"),
+    }
+    for (i, v) in x.iter().enumerate() {
+        if v.is_nan() {
+            assert_eq!(
+                &da[i * 4..i * 4 + 4],
+                &[0u8; 4],
+                "{name}: NaN sample {i} must encode as 0"
+            );
+        }
     }
     // ffmpeg's own s32 -> 24 bit is `>> 8`; the decoder returns `q24 << 8`
     for (i, s) in da.chunks(4).enumerate() {
