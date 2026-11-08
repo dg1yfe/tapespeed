@@ -128,7 +128,7 @@ compiles; it has not been benchmarked.
 ## License
 
 tapespeed is free software, licensed under the **GNU General Public License v3.0 or later** —
-see [LICENSE](LICENSE). Copyright (C) 2026 the tapespeed authors.
+see [LICENSE](LICENSE). Copyright (C) 2026 Felix Erckenbrecht.
 
 It bundles the DejaVu Sans fonts (in `crates/ts-plot/assets/`, with their own license file).
 All Rust dependencies are MIT and/or Apache-2.0 licensed. ffmpeg is called as a separate
