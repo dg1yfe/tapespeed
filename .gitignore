@@ -1,0 +1,6 @@
+target/
+.DS_Store
+dist/
+.testdata.stamp
+# stored test data: fetched by tools/fetch-testdata.sh (testdata.lock), not in git
+crates/*/tests/data/

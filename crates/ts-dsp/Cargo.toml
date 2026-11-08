@@ -1,0 +1,22 @@
+[package]
+name = "ts-dsp"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "tapespeed signal-processing primitives with SciPy-compatible definitions"
+publish = false
+
+[dependencies]
+rustfft = "=6.4.1"
+realfft = "=3.5.1"
+num-complex = "=0.4.6"
+rayon = "=1.12.0"
+faer = { version = "=0.24.4", default-features = false, features = ["std", "sparse-linalg"] }
+
+[dev-dependencies]
+criterion = { version = "=0.8.2", default-features = false, features = ["cargo_bench_support"] }
+npyz = { version = "=0.9.1", features = ["complex"] }
+
+[[bench]]
+name = "b_prims"
+harness = false

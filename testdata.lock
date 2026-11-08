@@ -1,0 +1,9 @@
+# Stored test data (crates/*/tests/data), not in git. tools/fetch-testdata.sh downloads
+# the archive from the url= lines (tried in order), checks size and sha256 and extracts it.
+# New data version N: tools/pack-testdata.sh N --lock, upload dist/vN/tapespeed-testdata.tar.zst to
+# /files/tapespeed/vN/ on every mirror, commit this file (version, size, sha256, urls together).
+version=1
+file=tapespeed-testdata.tar.zst
+size=55957172
+sha256=8989b0f30eb6426b60f8ea9ea50d287785bc6bf99e236433cd09bcaff4e8c16f
+url=https://ib-erckenbrecht.de/files/tapespeed/v1/tapespeed-testdata.tar.zst

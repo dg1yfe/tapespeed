@@ -1,0 +1,47 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ffmpeg (Linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg zstd
+      - name: Install ffmpeg (macOS)
+        if: runner.os == 'macOS'
+        run: brew install ffmpeg zstd
+      # the toolchain (version, rustfmt, clippy) comes from rust-toolchain.toml
+      - name: Toolchain
+        run: rustup toolchain install && rustup show active-toolchain
+      - uses: Swatinem/rust-cache@v2
+      # stored test data: the archive named in testdata.lock, cached by its sha256
+      - name: Test data key
+        id: td
+        run: echo "sha256=$(sed -n 's/^sha256=//p' testdata.lock)" >> "$GITHUB_OUTPUT"
+      - name: Test data cache
+        uses: actions/cache@v4
+        with:
+          path: dist
+          key: testdata-${{ steps.td.outputs.sha256 }}
+      # downloads from the url= mirrors of testdata.lock unless the cache restored the archive;
+      # fails with a clear error if no mirror delivers it
+      - name: Fetch test data
+        run: tools/fetch-testdata.sh
+      - name: fmt
+        run: cargo fmt --all --check
+      - name: clippy
+        run: cargo clippy --workspace --all-targets -- -D warnings
+      - name: test
+        run: cargo test --workspace --release

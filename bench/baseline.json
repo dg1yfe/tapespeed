@@ -1,0 +1,15 @@
+{
+ "note": "bench/check.sh --update; medians (s / ms); see bench/results.md",
+ "date": "2026-11-08 14:48",
+ "rev": "unknown",
+ "loadavg": "4.19",
+ "tol": 0.10,
+ "values": {
+  "macro/synth_line_wall_s": 2.07,
+  "m3/correct_10s_stereo_1t_ms": 49.1408,
+  "m3/het_decimate_60s_1t_ms": 46.1252,
+  "m3/pll_1M_1t_ms": 79.5926,
+  "b/welch_512k_nper4096_1t_ms": 2.4514,
+  "b/stft_60s_44k1_nper4096_1t_ms": 23.5472
+ }
+}
