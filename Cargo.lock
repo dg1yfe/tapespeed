@@ -1474,7 +1474,7 @@ dependencies = [
 
 [[package]]
 name = "tapespeed"
-version = "0.1.0"
+version = "26.11.1-rc.1"
 dependencies = [
  "clap",
  "indexmap",
@@ -1548,7 +1548,7 @@ dependencies = [
 
 [[package]]
 name = "ts-core"
-version = "0.1.0"
+version = "26.11.1-rc.1"
 dependencies = [
  "criterion",
  "indexmap",
@@ -1568,7 +1568,7 @@ dependencies = [
 
 [[package]]
 name = "ts-dsp"
-version = "0.1.0"
+version = "26.11.1-rc.1"
 dependencies = [
  "criterion",
  "faer",
@@ -1581,7 +1581,7 @@ dependencies = [
 
 [[package]]
 name = "ts-io"
-version = "0.1.0"
+version = "26.11.1-rc.1"
 dependencies = [
  "libc",
  "md-5",
@@ -1592,7 +1592,7 @@ dependencies = [
 
 [[package]]
 name = "ts-plot"
-version = "0.1.0"
+version = "26.11.1-rc.1"
 dependencies = [
  "plotters",
  "serde_json",

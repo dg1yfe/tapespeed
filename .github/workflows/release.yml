@@ -12,6 +12,7 @@ permissions:
 
 env:
   CARGO_TERM_COLOR: always
+  CARGO_PROFILE_RELEASE_STRIP: debuginfo # release downloads without debug info (local builds keep it)
 
 jobs:
   build:
@@ -76,6 +77,14 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/release-notes.md
+          sparse-checkout-cone-mode: false
+
+      - name: Release notes header
+        run: cp .github/release-notes.md release-notes.md
+
       - uses: actions/download-artifact@v4
         with:
           path: dist
@@ -92,4 +101,5 @@ jobs:
           pre=""
           case "$GITHUB_REF_NAME" in *-*) pre="--prerelease" ;; esac
           gh release create "$GITHUB_REF_NAME" dist/*.tar.gz dist/SHA256SUMS \
-            --repo "$GITHUB_REPOSITORY" --title "tapespeed $GITHUB_REF_NAME" --generate-notes $pre
+            --repo "$GITHUB_REPOSITORY" --title "tapespeed $GITHUB_REF_NAME" \
+            --notes-file release-notes.md --generate-notes $pre

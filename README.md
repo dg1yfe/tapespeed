@@ -34,8 +34,23 @@ AM broadcast, and notch out Morse code that sneaked into a recording.
 
 ## Getting started
 
-You need [ffmpeg](https://ffmpeg.org) (for reading and writing audio files) and a Rust toolchain
-([rustup](https://rustup.rs)); the right Rust version is picked up automatically.
+tapespeed needs [ffmpeg](https://ffmpeg.org) for reading and writing audio files
+(`brew install ffmpeg` on macOS, `sudo apt install ffmpeg` on Debian/Ubuntu).
+
+**Ready-made binaries** for macOS (Apple Silicon and Intel) and Linux (x86_64 and ARM64) are on the
+[releases page](https://github.com/dg1yfe/tapespeed/releases). Download the archive for your
+system, unpack it and put `tapespeed` somewhere on your `PATH`. On Windows, use the Linux build
+inside WSL.
+
+The macOS binaries are not signed by Apple, so Gatekeeper blocks them on first start. Either
+right-click the file in Finder and choose *Open*, or remove the quarantine flag once:
+
+```sh
+xattr -d com.apple.quarantine tapespeed
+```
+
+**Building from source** needs a Rust toolchain ([rustup](https://rustup.rs)); the right Rust
+version is picked up automatically.
 
 ```sh
 cargo build --release -p tapespeed      # the program ends up in target/release/tapespeed
