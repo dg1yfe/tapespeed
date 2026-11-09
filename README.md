@@ -32,6 +32,48 @@ For each recording, tapespeed writes
 It can also remove the reference whistle itself, cut away the neighbour-station noise above an
 AM broadcast, and notch out Morse code that sneaked into a recording.
 
+## See it in action
+
+Here is a real example: a 43-minute recording of the offshore station Radio Caroline from April
+1979, taped off medium wave on a reel-to-reel deck and later shared as an MP3.
+
+**Step 1 — ask what's on the tape.** The survey samples the file, lists the steady tones it can
+find, checks which of them wobble together with the tape, and suggests a command line
+(shortened here):
+
+```text
+$ tapespeed aircheck.mp3 --survey
+
+CANDIDATES
+   #     f Hz class   nom   off %  pres  C/N0  ...  verdict
+   1   8916.3 AM     9000  -0.930 12/12  39.4  ...  trackable     whistle between two AM stations
+   2  15595.7 TV    15625  -0.188 12/12  33.9  ...  trackable     a TV set in the room
+COHERENCE
+    8916.3  15595.7  ...  0.968  0.992  0.986  yes (tape)       both wobble the same way
+PAIR
+  -> found: d 65.97 Hz, beats 8934.03 / 9065.97 Hz               both neighbour stations audible
+RECOMMEND
+  cmd: tapespeed 'aircheck.mp3' --ref 9000 --abs pair --check-line 15625 --lowpass --auto-notch -o 'aircheck_corrected.flac'
+```
+
+Two independent rulers were found, and they agree: the whistle between neighbouring AM stations
+and the line whistle of a television set. Because both neighbour stations are audible, tapespeed
+can even work out the absolute speed without trusting the 1970s transmitter to be on frequency.
+
+**Step 2 — correct it.** Running the suggested command writes the corrected audio and this plot:
+
+![Speed plot of the Radio Caroline aircheck](docs/guide-img/speed-aircheck.png)
+
+The top panel shows how fast the tape really ran over the whole 43 minutes: a slow drift of about
+one percent from start to end, a short jump near the 20-minute mark (confirmed by the TV whistle,
+so it really happened on the tape), and on top of everything a broad band of fast flutter. The
+detail at the bottom left zooms into five seconds: the deck's capstan wobbled about 7.5 times a
+second by ±0.5 %. The spectrum at the bottom right breaks the wobble down by speed — the sharp
+peaks are the turning parts of the machine. All of that is now gone from the corrected file.
+
+The [user guide](docs/USER_GUIDE.md) walks through this example in detail and explains how to read
+every part of the survey and the plot.
+
 ## Getting started
 
 tapespeed needs [ffmpeg](https://ffmpeg.org) for reading and writing audio files
