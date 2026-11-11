@@ -3,7 +3,7 @@ resolver = "3"
 members = ["crates/*"]
 
 [workspace.package]
-version = "26.11.1-rc.1"
+version = "26.11.1"
 edition = "2024"
 license = "GPL-3.0-or-later"
 authors = ["Felix Erckenbrecht <code@eligs.de>"]
